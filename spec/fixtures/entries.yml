@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyString
+  paid_on: 2008-06-02
+  amount_in_pence: 1
+  account_id: 1
+
+two:
+  description: MyString
+  paid_on: 2008-06-02
+  amount_in_pence: 1
+  account_id: 1

@@ -1,0 +1,23 @@
+<p>
+  <b>Description:</b>
+  <%=h @entry.description %>
+</p>
+
+<p>
+  <b>Paid on:</b>
+  <%=h @entry.paid_on %>
+</p>
+
+<p>
+  <b>Amount in pence:</b>
+  <%=h @entry.amount_in_pence %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%=h @entry.account.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_account_entry_path(@account, @entry) %> |
+<%= link_to 'Back', account_entries_path(@account) %>

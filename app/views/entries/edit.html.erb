@@ -1,0 +1,28 @@
+<h1>Editing entry</h1>
+
+<% form_for([@account, @entry]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :paid_on %><br />
+    <%= f.date_select :paid_on %>
+  </p>
+  <p>
+    <%= f.label :amount_in_pence %><br />
+    <%= f.text_field :amount_in_pence %>
+  </p>
+  <p>
+    <%= f.label :account_id %><br />
+    <%= f.collection_select :account_id, Account.find(:all), :id, :name %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', [@account, @entry] %> |
+<%= link_to 'Back', account_entries_path(@account) %>

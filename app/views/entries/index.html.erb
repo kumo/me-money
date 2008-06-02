@@ -1,0 +1,25 @@
+<h1>Listing entries for <%= @account.name %></h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Paid on</th>
+    <th>Amount in pence</th>
+  </tr>
+
+<% for entry in @entries %>
+  <tr>
+    <td><%=h entry.description %></td>
+    <td><%=h entry.paid_on %></td>
+    <td><%=h entry.amount_in_pence %></td>
+    <td><%= link_to 'Show', [@account, entry] %></td>
+    <td><%= link_to 'Edit', edit_account_entry_path(@account, entry) %></td>
+    <td><%= link_to 'Destroy', [@account, entry], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New entry', new_account_entry_path(@account) %> |
+<%= link_to 'Back to account', account_path(@account) %>
