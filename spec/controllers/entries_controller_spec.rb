@@ -111,7 +111,7 @@ describe EntriesController do
       response.should render_template('show')
     end
   
-    it "should find the account's entry requested" do
+    it "should find the account's requested entry" do
       @entries.should_receive(:find).with("1").and_return(@entry)
       do_get
     end
@@ -153,7 +153,7 @@ describe EntriesController do
       response.should be_success
     end
   
-    it "should find the account's entry requested" do
+    it "should find the account's requested entry" do
       @entries.should_receive(:find).with("1").and_return(@entry)
       do_get
     end
@@ -255,7 +255,7 @@ describe EntriesController do
       response.should render_template('edit')
     end
   
-    it "should find the account's entry requested" do
+    it "should find the account's requested entry" do
       @entries.should_receive(:find).with("1").and_return(@entry)
       do_get
     end
@@ -347,7 +347,7 @@ describe EntriesController do
         put :update, :id => "1", :account_id => "2"
       end
 
-      it "should find the account's entry requested" do
+      it "should find the account's requested entry" do
         @entries.should_receive(:find).with("1").and_return(@entry)
         do_put
       end
@@ -409,7 +409,7 @@ describe EntriesController do
       delete :destroy, :id => "1", :account_id => "2"
     end
 
-    it "should find the account's entry requested" do
+    it "should find the account's requested entry" do
       @entries.should_receive(:find).with("1").and_return(@entry)
       do_delete
     end
