@@ -1,0 +1,15 @@
+Story: spend cash
+  As a savings account holder
+  I want to spend money in my wallet
+  So that I can buy some things
+
+  Scenario: wallet has money
+    Given my wallet balance is 100 euros
+    When I spend 20 euros
+    Then my wallet balance should be 80 euros
+
+  Scenario: wallet has no money
+    Given my wallet balance is 0 euros
+    When I spend 10 euros
+    Then my wallet balance should be -10 euros
+    And I should see an error message
