@@ -90,8 +90,10 @@ describe EntriesController do
 
     before(:each) do
       @entry = mock_model(Entry)
-      Entry.stub!(:find).and_return(@entry)
+      @entries = mock("Array of Entries")
+      @entries.stub!(:find).and_return(@entry)
       @account = mock_model(Account)
+      @account.stub!(:entries).and_return(@entries)
       Account.stub!(:find).and_return(@account)
     end
   
@@ -109,8 +111,8 @@ describe EntriesController do
       response.should render_template('show')
     end
   
-    it "should find the entry requested" do
-      Entry.should_receive(:find).with("1").and_return(@entry)
+    it "should find the account's entry requested" do
+      @entries.should_receive(:find).with("1").and_return(@entry)
       do_get
     end
   
@@ -134,8 +136,10 @@ describe EntriesController do
 
     before(:each) do
       @entry = mock_model(Entry, :to_xml => "XML")
-      Entry.stub!(:find).and_return(@entry)
+      @entries = mock("Array of Entries")
+      @entries.stub!(:find).and_return(@entry)
       @account = mock_model(Account)
+      @account.stub!(:entries).and_return(@entries)
       Account.stub!(:find).and_return(@account)
     end
   
@@ -149,8 +153,8 @@ describe EntriesController do
       response.should be_success
     end
   
-    it "should find the entry requested" do
-      Entry.should_receive(:find).with("1").and_return(@entry)
+    it "should find the account's entry requested" do
+      @entries.should_receive(:find).with("1").and_return(@entry)
       do_get
     end
   
@@ -230,8 +234,10 @@ describe EntriesController do
 
     before(:each) do
       @entry = mock_model(Entry)
-      Entry.stub!(:find).and_return(@entry)
+      @entries = mock("Array of Entries")
+      @entries.stub!(:find).and_return(@entry)
       @account = mock_model(Account)
+      @account.stub!(:entries).and_return(@entries)
       Account.stub!(:find).and_return(@account)
     end
   
@@ -249,8 +255,8 @@ describe EntriesController do
       response.should render_template('edit')
     end
   
-    it "should find the entry requested" do
-      Entry.should_receive(:find).and_return(@entry)
+    it "should find the account's entry requested" do
+      @entries.should_receive(:find).with("1").and_return(@entry)
       do_get
     end
   
@@ -327,8 +333,10 @@ describe EntriesController do
 
     before(:each) do
       @entry = mock_model(Entry, :to_param => "1")
-      Entry.stub!(:find).and_return(@entry)
+      @entries = mock("Array of Entries")
+      @entries.stub!(:find).and_return(@entry)
       @account = mock_model(Account, :to_param => "2")
+      @account.stub!(:entries).and_return(@entries)
       Account.stub!(:find).and_return(@account)
     end
     
@@ -339,8 +347,8 @@ describe EntriesController do
         put :update, :id => "1", :account_id => "2"
       end
 
-      it "should find the entry requested" do
-        Entry.should_receive(:find).with("1").and_return(@entry)
+      it "should find the account's entry requested" do
+        @entries.should_receive(:find).with("1").and_return(@entry)
         do_put
       end
 
@@ -390,8 +398,10 @@ describe EntriesController do
 
     before(:each) do
       @entry = mock_model(Entry, :destroy => true)
-      Entry.stub!(:find).and_return(@entry)
+      @entries = mock("Array of Entries")
+      @entries.stub!(:find).and_return(@entry)
       @account = mock_model(Account, :to_param => "2")
+      @account.stub!(:entries).and_return(@entries)
       Account.stub!(:find).and_return(@account)
     end
   
@@ -399,8 +409,8 @@ describe EntriesController do
       delete :destroy, :id => "1", :account_id => "2"
     end
 
-    it "should find the entry requested" do
-      Entry.should_receive(:find).with("1").and_return(@entry)
+    it "should find the account's entry requested" do
+      @entries.should_receive(:find).with("1").and_return(@entry)
       do_delete
     end
   
