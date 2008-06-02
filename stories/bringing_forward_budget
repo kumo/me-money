@@ -1,0 +1,34 @@
+Story: bringing forward a budget
+  As a budget creator
+  I want to bring unspent money from one budget to another
+  So that I always know where my money has gone
+  
+  Scenario: nothing left over
+    Given a budget with an income of 100 euros
+    And the budget has a 'food' budget category of 20 euros
+    And the budget has an 'entertainment' budget category of 80 euros
+    And I have spent 20 euros in the 'food' budget category
+    And I have spent 80 euros in the 'entertainment' budget category
+    When I create a new budget from the existing budget
+    Then I should see that 0 euros have been brought over
+    
+  Scenario: some money left over
+    Given a budget with an income of 100 euros
+    And the budget has a 'food' budget category of 20 euros
+    And the budget has an 'entertainment' budget category of 80 euros
+    And I have spent 10 euros in the 'food' budget category
+    And I have spent 70 euros in the 'entertainment' budget category
+    When I create a new budget from the existing budget
+    Then I should see that 20 euros have been brought over
+    And the new budget should have an income of 20 euros
+  
+  Scenario: too much spent
+    Given a budget with an income of 100 euros
+    And the budget has a 'food' budget category of 20 euros
+    And the budget has an 'entertainment' budget category of 80 euros
+    And I have spent 30 euros in the 'food' budget category
+    And I have spent 90 euros in the 'entertainment' budget category
+    When I create a new budget from the existing budget
+    Then I should see that -20 euros have been brought over
+    And the new budget should have an income of -20 euros
+

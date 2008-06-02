@@ -1,0 +1,38 @@
+Story: balancing a budget
+  As a spender
+  I want to be able to balance a budget over time
+  So that I can respond to my spending
+  
+  Scenario: overspent in a budget category
+    Given a budget with an income of 100 euros
+    And the budget has a 'food' budget category of 20 euros
+    And the budget has an 'entertainment' budget category of 80 euros
+    And I have spent 40 euros in the 'food' budget category
+    And I have spent 20 euros in the 'entertainment' budget category
+    When I balance the budget
+    Then I should see that the 'food' budget category differs by 20 euros
+    And I should see that the budget is imbalanced by -20 euros
+    And I should see a 'budget needs adjusting' warning message
+  
+  Scenario: minimum amounts
+    Given a budget with an income of 100 euros
+    And the budget has a 'food' budget category of 20 euros
+    And the budget has an 'entertainment' budget category of 80 euros
+    And I have spent 20 euros in the 'food' budget category
+    And I have spent 50 euros in the 'entertainment' budget category
+    When I balance the budget
+    Then I should see that the 'food' budget category cannot go below 20 euros
+    And I should see that the 'entertainment' budget category cannot go below 50 euros
+    And I should see that 70 euros has already been spent
+
+  Scenario: automatic categories
+    Given a budget with an income of 100 euros
+    And the budget has a 'car payment' automatic budget category of 20 euros
+    And the budget has an 'entertainment' budget category of 80 euros
+    And I have spent 0 euros in the 'food' budget category
+    And I have spent 50 euros in the 'entertainment' budget category
+    When I balance the budget
+    Then I should see that the 'car payment' budget category cannot go below 20 euros
+    And I should see that the 'entertainment' budget category cannot go below 50 euros
+    And I should see that 70 euros has already been allocated
+    And I should see that 50 euros has already been spent

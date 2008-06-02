@@ -1,0 +1,10 @@
+Story: using an iPhone
+  As an iPhone user
+  I want to be able to quickly enter information
+  So that I can go back to doing other things
+  
+  Scenario: viewing main page
+    Given an account with some money in it
+    When I view my dashboard with an iPhone
+    Then I should see the dashboard
+    And I should see the new entry form

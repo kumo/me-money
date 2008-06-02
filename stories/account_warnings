@@ -1,0 +1,25 @@
+Story: account warnings
+  As a frequent spender
+  I want to receive warnings when there are things to watch out for
+  So that I can pro-actively deal with my money
+  
+  Scenario: no money in wallet
+    Given an account named 'my wallet'
+    And the account has a warning of 50 euros
+    And the account has no money in it
+    When I view my dashboard
+    Then I should see a warning for the wallet
+  
+  Scenario: less that 10% of limit
+    Given an account named 'my wallet'
+    And the account has a warning of 50 euros
+    And the account has 52 euros in it
+    When I view my dashboard
+    Then I should see a warning for the wallet
+  
+  Scenario: not enough money left
+    Given an account named 'my electronic key'
+    And the account has 1 euro in it
+    And I always spend at least 2 euros
+    When I view my dashboard
+    Then I should see a warning for the electronic key

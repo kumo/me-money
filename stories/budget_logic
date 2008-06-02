@@ -1,0 +1,37 @@
+Story: checking a budget
+  As an account holder
+  I want to know how much money I have in each budget
+  So that I don't spend all my money
+
+  Scenario: freshly started
+    Given the budget balance is 100 euros
+    And the budget lasts 10 days
+    When I start the budget
+    Then my daily balance is 10 euros
+  
+  Scenario: spending less than allocated daily
+    Given my budget balance is 100 euros
+    And the budget lasts 10 days
+    And I am on day 1 of the budget
+    When I spend 5 euros
+    Then my remaining daily balance is 5 euros
+    And my budget balance is 95 euros
+    And the daily balance is 10 euros
+  
+  Scenario: spending daily allocated money
+    Given my budget balance is 100 euros
+    And the budget lasts 10 days
+    And I am on day 1 of the budget
+    When I spend 10 euros
+    Then my remaining daily balance is 0 euros
+    And my budget balance is 90 euros
+    And the daily balance is 10 euros
+    
+  Scenario: spending more than allocated daily
+    Given my budget balance is 100 euros
+    And the budget lasts 10 days
+    And I am on day 1 of the budget
+    When I spend 15 euros
+    Then my budget balance is 85 euros
+    And my remaining daily balance is 0 euros
+    And the daily balance is not 10 euros

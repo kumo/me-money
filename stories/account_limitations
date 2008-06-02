@@ -1,0 +1,15 @@
+Story: applying limitations to an account
+  As a consumer
+  I want to store money in different locations
+  So that I don't need to carry loose change
+  
+  Scenario: non-transferrable
+    Given an account named 'electronic key'
+    And an account named 'wallet'
+    And the account is non-transferrable
+    And the account has 5 euros in it
+    When I start a new transfer
+    Then I should not see the 'electronic key' in the list
+  
+  Scenario: minimum amount
+    

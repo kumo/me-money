@@ -1,0 +1,17 @@
+Story: budget warnings
+  As a budget user
+  I want to receive warnings when there are things to watch out for
+  So that I can pro-actively deal with my money
+  
+  Scenario: overspent
+    Given my 'food' budget category has 30 euros dedicated to it
+    And the budget category has 0 euros left
+    When I spend 10 euros in that category
+    Then I should see a warning for that budget category
+  
+  Scenario: not enough money left
+    Given my 'food' budget category has 30 euros dedicated to it
+    And the budget category has 3 euros left
+    And I always spend at least 5 euros in that category
+    When I view my dashboard
+    Then I should see a warning for the 'food' budget category

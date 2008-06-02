@@ -1,0 +1,30 @@
+Story: saving up for a rainy day
+  As a consumer
+  I want to save up money for an item
+  So that I can buy it eventually
+  
+  Scenario: adding to budget with no deadline
+    Given a piggy bank target of 100 euros
+    When I want to create a new budget
+    Then I should see the piggy bank category in the list
+    And the piggy bank category should have 100 euros associated to it
+  
+  Scenario: adding to budget with a deadline
+    Given a piggy bank target of 100 euros
+    And the piggy bank is due next month
+    When I want to create a new budget
+    Then I should see the piggy bank category in the list
+    And the piggy bank category should have 50 euros associated to it
+    
+  Scenario: has deadline
+     Given a piggy bank target of 100 euros
+     And the piggy bank has 10 euros in it
+     When I view the piggy bank
+     Then I should see that it has 90 euros left
+    
+  Scenario: transferring to piggy bank
+    Given a piggy bank target of 100 euros
+    And an account with 200 euros in it
+    When I transfer 50 from the account to the piggy bank
+    Then the piggy bank should have 50 euros in it
+    And the account should have 150 euros in it

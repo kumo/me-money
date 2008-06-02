@@ -1,0 +1,38 @@
+Story: dealing with a debt
+  As an ex-student
+  I want to pay off my student loans
+  So that I can finally break free
+  
+  Scenario: allocating some money to the debt
+    Given a debt named 'student loan'
+    And the debt is for 300 euros
+    When I allocate 100 euros for the debt
+    Then I should need to allocate 200 euros more
+    And I should have 300 euros left to pay
+    And the debt should not be covered
+    
+  Scenario: allocating too much money
+    Given a debt named 'student loan'
+    And the debt is for 300 euros
+    When I allocate 400 euros for the debt
+    Then I should need to allocate 0 euros more
+    And the debt should be covered
+    And the debt should be over-allocated
+  
+  Scenario: paying something off
+    Given a debt named 'student loan'
+    And the debt is for 300 euros
+    And I have allocated 150 euros for the debt
+    When I pay off 100 euros from the debt
+    Then I should have 200 euros left to pay
+    And I should have 150 euros left to allocate
+    And the debt should not be covered
+  
+  Scenario: paying it all off
+    Given a debt named 'student loan'
+    And the debt is for 300 euros
+    And I have allocated 300 euros for the debt
+    When I pay off 300 euros from the debt
+    Then I should have 0 euros left to pay
+    And I should have 0 euros left to allocate
+    And the debt should be closed  

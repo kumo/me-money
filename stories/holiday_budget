@@ -1,0 +1,55 @@
+Story: holiday budget
+  As a traveller
+  I want to create a holiday budget
+  So that I don't spend all my money on souvenirs
+  
+  Scenario: normal overspending
+    Given today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 30 euros
+    And today's allocation for 'entertainment' is 20 euros
+    When I overspend by 10 euros on 'food'
+    And I overspend by 10 euros on 'souvenirs'
+    And I overspend by 10 euros on 'hotel'
+    Then today's remaining budget should be 0 euros
+
+  Scenario: money left over
+    Given today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 30 euros
+    And today's allocation for 'entertainment' is 20 euros
+    When I spend 60 euros on 'food'
+    And I spend 5 euros on 'souvenirs'
+    And I spend 10 euros on 'entertainment'
+    Then today's remaining budget should be 20 euros
+    And today's remaining allocation for 'food' should be 10 euros
+    And today's remaining allocation for 'souvenirs' should be 25 euros
+    And today's remaining allocation for 'entertainment' should be 10 euros
+
+  Scenario: daily limit cannot be broken
+    Given today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 30 euros
+    And today's allocation for 'entertainment' is 20 euros
+    And today's allocation is fixed
+    When I spend 95 euros on 'food'
+    Then today's remaining budget should be 25 euros
+  
+  Scenario: daily limit is enforced for all categories
+    Given today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 30 euros
+    And today's allocation for 'entertainment' is 20 euros
+    And today's allocation is fixed
+    When I spend 95 euros on 'food'
+    Then today's remaining allocation for 'food' should be 0 euros
+    And today's remaining allocation for 'souvenirs' should be 15 euros
+    And today's remaining allocation for 'entertainment' should be 10 euros
+
+  Scenario: fixed daily limit and important category
+    Given today's allocation for 'hotel' is 50 euros
+    And today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 20 euros
+    And spending is fixed
+    And 'hotel' is important
+    When I spend 100 euros on 'food'
+    Then today's remaining budget should be 50 euros
+    Then today's remaining allocation for 'hotel' should be 50 euros
+    And today's remaining allocation for 'souvenirs' should be 0 euros
+    And today's remaining allocation for 'food' should be 0 euros

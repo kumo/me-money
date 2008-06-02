@@ -1,0 +1,32 @@
+Story: creating a zero balanced budget
+  As a conscientious spender
+  I want to create a zero balanced budget
+  So that I know where I all money should go
+  
+  Scenario: money left over
+    Given my budget income is 100 euros
+    And a budget category is 80 euros
+    When I create a new category of 10 euros
+    Then my budget expenses should be 90 euros
+    And my budget should have 10 euros left
+    And my budget should not be ready
+    And I should see that I have 10 euros left to allocate
+  
+  Scenario: balanced out
+    Given my budget income is 100 euros
+    And my budget category is 80 euros
+    When I create a new category of 20 euros
+    Then my budget expenses should be 100 euros
+    And my budget should have 0 euros left
+    And my budget should be ready
+    And I should see that I have 0 euros left to allocate
+  
+  Scenario: over allocated
+    Given my budget income is 100 euros
+    And a budget category is 80 euros
+    When I create a new category of 30 euros
+    Then my budget expenses should be 110 euros
+    And my budget should have 0 euros left
+    And my budget should not be ready
+    And I should see a warning message
+    And I should see that I have 10 euros left to allocate

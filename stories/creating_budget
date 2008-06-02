@@ -1,0 +1,19 @@
+Story: creating next month's budget
+  As a budget creator
+  I want to see be able to base next month's budget on this month
+  So that I can quickly add the common information
+  
+  Scenario: piggy bank goal
+    Given a piggy bank target of 100 euros
+    When I want to create a new budget
+    Then I should see the piggy bank category in the list of expenses
+    And the piggy bank category should have 100 euros associated to it
+    And there should be a check box next to the piggy bank category
+
+  Scenario: overspent in a category
+    Given a budget with a 'food' budget category of 20 euros
+    And I have spent 40 euros in the 'food' budget category
+    When I want to create a new budget
+    Then I should see the 'food' budget category in the list of expenses
+    And the 'food' budget category should have 60 euros associated to it
+    And there should be a check box next to the 'food' budget category

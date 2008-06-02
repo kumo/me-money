@@ -1,0 +1,36 @@
+Story: using piggy bank
+  As a saver
+  I want to put money in a piggy bank
+  So that I can spend it someday
+  
+  Scenario: piggy bank has a goal
+    Given a piggy bank named 'Holiday'
+    And the piggy bank has a goal of 300 euros
+    When I add 50 euros to the piggy bank
+    Then I should have 50 euros in the piggy bank
+    And I should have 250 euros to go
+    And the piggy bank goal should not be reached
+  
+  Scenario: some money has been allocated towards goal
+    Given a piggy bank named 'Holiday'
+    And the piggy bank has a goal of 300 euros
+    And the piggy bank has 150 euros in it
+    When I allocate 100 euros to 'travel'
+    Then I should have 150 euros to go
+    And the piggy bank goal should not be reached
+  
+  Scenario: goal reached
+    Given a piggy bank named 'Holiday'
+    And the piggy bank has a goal of 300 euros
+    And the piggy bank has 250 euros in it
+    When I add 50 euros to the piggy bank
+    Then I should have 0 euros to go
+    And the piggy bank goal should be reached
+  
+  Scenario: no goal
+    Given a piggy bank named 'Holiday'
+    And the piggy bank has 100 euros in it
+    When I add 200 euros to the piggy bank
+    Then I should have 300 euros in the piggy bank
+    And the piggy bank should not have a goal
+    

@@ -1,0 +1,35 @@
+Story: shared categories
+  As a traveller
+  I want to share funds between certain categories
+  So that I can spend different amounts on different days
+  
+  Scenario: shared categories
+    Given today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 20 euros
+    And today's allocation for 'entertainment' is 30 euros
+    And 'food' are shared
+    And 'souvenirs' are shared
+    Then today's shared allocation should be 90 euros
+
+  Scenario: over spending in shared categories
+    Given today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 20 euros
+    And today's allocation for 'entertainment' is 20 euros
+    And 'food' are shared
+    And 'souvenirs' are shared
+    And 'entertainment' are shared
+    When I spend 80 euros on 'food'
+    Then today's shared allocation should be 10 euros
+    And today's remaining allocation for 'souvenirs' should be 15 euros
+    And today's remaining allocation for 'entertainment' should be 15 euros
+
+  Scenario: under spending in shared categories
+    Given today's allocation for 'food' is 70 euros
+    And today's allocation for 'souvenirs' is 20 euros
+    And today's allocation for 'entertainment' is 20 euros
+    And 'souvenirs' are shared with 'food'
+    And 'entertainment' are shared with 'food'
+    When I spend 50 euros on 'food'
+    Then today's shared allocation should be 60 euros
+    And today's remaining allocation for 'souvenirs' should be 30 euros
+    And today's remaining allocation for 'entertainment' should be 30 euros

@@ -1,0 +1,34 @@
+Story: assigning dates to a budget
+  As a budget creator
+  I want to assign a starting and ending date to a budget
+  So that I can track over a certain period
+  
+  Scenario: starts today
+    Given a budget starting today
+    And the budget ends tomorrow
+    When I view the budget
+    Then I should see that the budget is in progress
+    And I should see that the budget lasts 2 days
+    And I should see that I am on day 1 of the budget
+    
+  Scenario: already started
+    Given a budget starting yesterday
+    And the budget ends tomorrow
+    When I view the budget
+    Then I should see that the budget is in progress
+    And I should see that the budget lasts 3 days
+    And I should see that I am on day 2 of the budget
+    
+  Scenario: finished
+    Given a budget starting 2 days ago
+    And the budget ends yesterday
+    When I view the budget
+    Then I should see that the budget has finished
+    And I should see that the budget lasts 2 days
+  
+  Scenario: not yet started
+    Given a budget starting tomorrow
+    And the budget ends in 5 days
+    When I view the budget
+    Then I should see that the budget hasn't started yet
+    And I should see that the budget lasts 5 days
