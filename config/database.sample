@@ -1,0 +1,15 @@
+local: &local
+  adapter: sqlite3
+  timeout: 5000
+
+development:
+  database: db/development.sqlite3
+  <<: *local
+
+test:
+  database: db/test.sqlite3
+  <<: *local
+
+production:
+  database: db/production.sqlite3
+  <<: *local
