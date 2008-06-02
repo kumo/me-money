@@ -175,6 +175,7 @@ describe EntriesController do
 
     before(:each) do
       @entry = mock_model(Entry)
+      @entry.stub!(:account=)
       Entry.stub!(:new).and_return(@entry)
       @account = mock_model(Account)
       Account.stub!(:find).and_return(@account)
@@ -204,6 +205,11 @@ describe EntriesController do
       do_get
     end
   
+    it "should assign the account to the entry" do
+      @entry.should_receive(:account=).with(@account)
+      do_get
+    end
+    
     it "should assign the new entry for the view" do
       do_get
       assigns[:entry].should equal(@entry)

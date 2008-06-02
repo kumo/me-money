@@ -27,6 +27,7 @@ class EntriesController < ApplicationController
   # GET /entries/new.xml
   def new
     @entry = Entry.new
+    @entry.account = @account
 
     respond_to do |format|
       format.html # new.html.erb
