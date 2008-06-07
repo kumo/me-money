@@ -315,13 +315,6 @@ describe EntriesController do
         assigns[:account].should equal(@account)
       end
       
-      it "should update the account's balance" do
-        @account.should_receive(:balance_in_pence).and_return(100)
-        @entry.should_receive(:amount_in_pence).and_return(30)
-        @account.should_receive(:update_attribute).with(:balance_in_pence, 70).and_return(true)
-        do_post
-      end
-
     end
     
     describe "with failed save" do

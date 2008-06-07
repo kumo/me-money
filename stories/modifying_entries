@@ -1,0 +1,42 @@
+Story: modifying existing entries
+  As a mere mortal
+  I want to able to fix mistakes that I have made
+  So that I don't have to start from scratch each time
+  
+  Scenario: changing description
+    Given an account named 'wallet'
+    And the account has 50 euros in it
+    And the account has an entry for 30 euros named 'sushi'
+    When I change the entry description to 'inarizushi'
+    Then I should see the entry
+    And the account balance should still be 50 euros
+    And the entry should now be called 'inarizushi'
+    And the entry amount should still be 30 euros
+
+  Scenario: making amount smaller
+    Given an account named 'wallet'
+    And the account has 50 euros in it
+    And the account has an entry for 30 euros named 'sushi'
+    When I change the entry amount to 20 euros
+    Then I should see the entry
+    And the account balance should now be 60 euros
+    And the entry amount should now be 20 euros
+    And the entry should still be called 'sushi'
+
+  Scenario: making amount bigger
+    Given an account named 'wallet'
+    And the account has 50 euros in it
+    And the account has an entry for 30 euros named 'sushi'
+    When I change the entry amount to 80 euros
+    Then I should see the entry
+    And the account balance should now be 0 euros
+    And the entry amount should now be 80 euros
+    And the entry should still be called 'sushi'
+
+  Scenario: deleting an entry
+    Given an account named 'wallet'
+    And the account has 50 euros in it
+    And the account has an entry for 30 euros named 'sushi'
+    When I delete the entry
+    Then I should see the list of entries
+    And the account balance should now be 80 euros
