@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :accounts, :has_many => :entries
+  map.resources :accounts, :has_many => :entries, :collection => {:dashboard => :get}
 
+  map.root :controller => "accounts", :action => "dashboard"
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

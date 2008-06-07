@@ -50,6 +50,7 @@ class EntriesController < ApplicationController
         flash[:notice] = 'Entry was successfully created.'
         format.html { redirect_to(account_entries_url(@account)) }
         format.xml  { render :xml => @entry, :status => :created, :location => @entry }
+        format.js # create.js.rjs
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @entry.errors, :status => :unprocessable_entity }

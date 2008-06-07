@@ -310,4 +310,36 @@ describe AccountsController do
       response.should redirect_to(accounts_url)
     end
   end
+  
+  describe "handling GET /accounts/dashboard" do
+
+    before(:each) do
+      @account = mock_model(Account)
+      Account.stub!(:find).and_return([@account])
+    end
+  
+    def do_get
+      get :dashboard
+    end
+  
+    it "should be successful" do
+      do_get
+      response.should be_success
+    end
+
+    it "should render dashboard template" do
+      do_get
+      response.should render_template('dashboard')
+    end
+  
+    it "should find all accounts" do
+      Account.should_receive(:find).with(:all).and_return([@account])
+      do_get
+    end
+  
+    it "should assign the found accounts for the view" do
+      do_get
+      assigns[:accounts].should == [@account]
+    end
+  end  
 end

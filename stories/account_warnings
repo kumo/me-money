@@ -6,7 +6,7 @@ Story: account warnings
   Scenario: no money in wallet
     Given an account named 'my wallet'
     And the account has a warning of 50 euros
-    And the account has no money in it
+    And the account has 0 euros in it
     When I view my dashboard
     Then I should see a warning for the wallet
   
@@ -19,7 +19,7 @@ Story: account warnings
   
   Scenario: not enough money left
     Given an account named 'my electronic key'
-    And the account has 1 euro in it
-    And I always spend at least 2 euros
+    And the account has 5 euro in it
+    And I always spend at least 10 euros
     When I view my dashboard
     Then I should see a warning for the electronic key

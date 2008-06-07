@@ -1,0 +1,19 @@
+Story: viewing the dashboard
+  As a money tracker
+  I want quick access to my situation
+  So that I don't lose my momentum
+  
+  Scenario: no accounts
+    Given I have no accounts
+    When I view my dashboard
+    Then I should see a no_accounts message
+    And I should see a link to create a new account
+    And I should not see a new_entry form
+  
+  Scenario: one account
+    Given an account named 'my wallet'
+    When I view my dashboard
+    Then I should see a new_entry form
+    And I should not see the account list
+  
+  

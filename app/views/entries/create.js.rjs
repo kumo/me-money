@@ -1,0 +1,1 @@
+page.replace_html 'status', "Spent #{@entry.amount_in_pence} on '#{@entry.description}'"

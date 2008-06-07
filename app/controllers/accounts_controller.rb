@@ -82,4 +82,13 @@ class AccountsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # GET /accounts/dashboard
+  def dashboard
+    @accounts = Account.find(:all)
+
+    respond_to do |format|
+      format.html # dashboard.html.erb
+    end
+  end
 end

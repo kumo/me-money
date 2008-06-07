@@ -26,6 +26,10 @@ describe AccountsController do
     it "should map { :controller => 'accounts', :action => 'destroy', :id => 1} to /accounts/1" do
       route_for(:controller => "accounts", :action => "destroy", :id => 1).should == "/accounts/1"
     end
+
+    it "should map { :controller => 'accounts', :action => 'dashboard' } to /accounts/dashboard" do
+      route_for(:controller => "accounts", :action => "dashboard").should == "/accounts/dashboard"
+    end
   end
 
   describe "route recognition" do
@@ -57,5 +61,13 @@ describe AccountsController do
     it "should generate params { :controller => 'accounts', action => 'destroy', id => '1' } from DELETE /accounts/1" do
       params_from(:delete, "/accounts/1").should == {:controller => "accounts", :action => "destroy", :id => "1"}
     end
+  end
+
+  it "should generate params { :controller => 'accounts', action => 'dashboard' } from GET /accounts/dashboard" do
+    params_from(:get, "/accounts/dashboard").should == {:controller => "accounts", :action => "dashboard"}
+  end
+
+  it "should generate params { :controller => 'accounts', action => 'dashboard' } from GET /" do
+    params_from(:get, "/").should == {:controller => "accounts", :action => "dashboard"}
   end
 end

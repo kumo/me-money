@@ -1,0 +1,22 @@
+<% if @accounts.any? -%>
+<% form_remote_tag :url => account_entries_url(@accounts.first), :html => {:id => "new_entry"}, :before => '$("quick_entry").disable();', :after => '$("quick_entry").enable(); $("new_entry").reset();' do -%>
+  <p>
+    <%= label_tag "entry[description]", :Description %><br />
+    <%= text_field_tag "entry[description]" %>
+  </p>
+  <p>
+    <%= label :entry, :amount_in_pence %><br />
+    <%= text_field :entry, :amount_in_pence %>
+  </p>
+  <p>
+    <%= label :entry, :account_id %><br />
+    <%= collection_select :entry, :account_id, Account.find(:all), :id, :name %>
+  </p>
+  <p>
+    <%= submit_tag "Create", :id => "quick_entry" %>
+  </p>
+<% end -%>
+<div id="status"></div>
+<% else -%>
+<p id="no_accounts"><%= link_to "Create a new account?", new_account_url %></p>
+<% end -%>
