@@ -15,5 +15,13 @@ Story: viewing the dashboard
     When I view my dashboard
     Then I should see a new_entry form
     And I should not see the account list
+    And I should see a hidden value with the account id
   
+  Scenario: multiple accounts
+    Given an account named 'my wallet'
+    And an account named 'my pocket'
+    When I view my dashboard
+    Then I should see a new_entry form
+    And I should see the account list
+
   
