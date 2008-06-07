@@ -28,10 +28,8 @@ steps_for :entries do
   end
 
   Then "the entry should now be called '$description'" do |description|
-    p @entry
     lambda {
       @entry.reload
-      p @entry
     }.should change(@entry, :description).to(description)
   end
 
