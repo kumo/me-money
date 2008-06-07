@@ -22,9 +22,8 @@ steps_for :entries do
   end
 
   Then "the entry amount should still be $amount euros" do |amount|
-    lambda {
-      @entry.reload
-    }.should_not change(@entry, :amount_in_pence)
+    @entry.reload
+    @entry.amount_in_pence.should == amount.to_i
   end
 
   Then "the entry should now be called '$description'" do |description|
@@ -34,8 +33,11 @@ steps_for :entries do
   end
 
   Then "the entry should still be called '$description'" do |description|
-    lambda {
-      @entry.reload
-    }.should_not change(@entry, :description)
+    @entry.reload
+    @entry.description.should === description
+  end
+
+  Then "I should see the list of entries" do
+    response.should render_template("entries/index")
   end
 end

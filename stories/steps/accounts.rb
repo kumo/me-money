@@ -7,11 +7,11 @@ steps_for :accounts do
     @account.update_attribute(:balance_in_pence, amount.to_i)
   end
   
-  Given "the account has an entry for $amount euros named '$name" do |amount, name|
+  Given "the account has an entry for $amount euros named '$name'" do |amount, name|
     @entry = @account.entries.create!(:amount_in_pence => amount, :description => name)
     
-    # have to reset the balance to the previous amount because the entry
-    # creation will remove the new amount!
+    # NOTE: the account's balance will have been changed when the entry
+    # was created, so we will need to reset the balance to the original amount.
     @account.reload
     @account.update_attribute(:balance_in_pence, @account.balance_in_pence + @entry.amount_in_pence)
   end
@@ -27,13 +27,8 @@ steps_for :accounts do
   end
 
   Then "the account balance should still be $amount euros" do |amount|
-    lambda {
-      @account.reload
-    }.should_not change(@account, :balance_in_pence)
-  end
-  
-  Then "I should see the list of entries" do
-    response.should render_template("entries/index")
+    @account.reload
+    @account.balance_in_pence.should == amount.to_i
   end
 end
 
