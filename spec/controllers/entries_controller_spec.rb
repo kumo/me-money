@@ -280,8 +280,11 @@ describe EntriesController do
 
     before(:each) do
       @entry = mock_model(Entry, :to_param => "1")
+      @entry.stub!(:amount_in_pence).and_return(30)
       Entry.stub!(:new).and_return(@entry)
       @account = mock_model(Account, :to_param => "2")
+      @account.stub!(:balance_in_pence).and_return(100)
+      @account.stub!(:update_attribute)
       Account.stub!(:find).and_return(@account)
     end
     
@@ -297,9 +300,9 @@ describe EntriesController do
         do_post
       end
 
-      it "should redirect to the new entry" do
+      it "should redirect to the list of entries" do
         do_post
-        response.should redirect_to(account_entry_url("2", "1"))
+        response.should redirect_to(account_entries_url("2"))
       end
       
       it "should find the account requested" do
@@ -310,6 +313,13 @@ describe EntriesController do
       it "should assign the found account for the view" do
         do_post
         assigns[:account].should equal(@account)
+      end
+      
+      it "should update the account's balance" do
+        @account.should_receive(:balance_in_pence).and_return(100)
+        @entry.should_receive(:amount_in_pence).and_return(30)
+        @account.should_receive(:update_attribute).with(:balance_in_pence, 70).and_return(true)
+        do_post
       end
 
     end

@@ -48,7 +48,8 @@ class EntriesController < ApplicationController
     respond_to do |format|
       if @entry.save
         flash[:notice] = 'Entry was successfully created.'
-        format.html { redirect_to([@account, @entry]) }
+        @account.update_attribute(:balance_in_pence, @account.balance_in_pence - @entry.amount_in_pence)
+        format.html { redirect_to(account_entries_url(@account)) }
         format.xml  { render :xml => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }

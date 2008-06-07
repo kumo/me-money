@@ -4,12 +4,15 @@ Story: spend cash
   So that I can buy some things
 
   Scenario: wallet has money
-    Given my wallet balance is 100 euros
+    Given an account named 'my wallet'
+    And the account has 100 euros in it
     When I spend 20 euros
-    Then my wallet balance should be 80 euros
+    Then I should see the list of entries
+    And the account balance should now be 80 euros
 
   Scenario: wallet has no money
-    Given my wallet balance is 0 euros
+    Given an account named 'my wallet'
+    And the account has 0 euros in it
     When I spend 10 euros
-    Then my wallet balance should be -10 euros
-    And I should see an error message
+    Then I should see the list of entries
+    And the account balance should now be -10 euros
