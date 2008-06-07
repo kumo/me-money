@@ -36,3 +36,24 @@ describe Entry do
     @entry.should have(1).error_on(:amount_in_pence)
   end
 end
+
+describe Entry, "when creating" do
+  before(:each) do
+    @account = Account.create!(:name => "New account", :balance_in_pence => 0)
+    @entry = Entry.new(:account => @account, :amount_in_pence => 32, :description => "Entry Description")
+  end
+  
+  it "should assign today's date if not specified" do
+    @entry.paid_on = nil
+    lambda {
+      @entry.save
+    }.should change(@entry, :paid_on).to(Date.today)
+  end
+  
+  it "should not assign today's date if it has already been specified" do
+    @entry.paid_on = 5.days.ago
+    lambda {
+      @entry.save
+    }.should_not change(@entry, :paid_on)
+  end
+end
