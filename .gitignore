@@ -1,4 +1,5 @@
 *.log
 database.yml
+schema.rb
 *.sqlite3
 .DS_Store
