@@ -1,0 +1,40 @@
+Story: types of accounts
+  As a money tracker
+  I want to store money in various locations
+  So that I can use it for specific things
+  
+  Scenario: creating an account
+    When I want to create a new account
+    Then I should see the list of account types
+    And I should see the 'piggy bank' option
+    And I should see the 'debt' option
+    And I should see the 'bank' option
+    And I should see the 'wallet' option
+    
+  Scenario: bank account
+    When I create a new bank account
+    Then I should see the account
+    And I should be able to transfer money to it
+    And I should be able to transfer money from it
+    And I should be able to spend money
+    
+  Scenario: piggy bank
+    When I create a new piggy bank
+    Then I should see the account
+    And I should be able to transfer money to it
+    And I should be able to transfer money from it
+    And I should not be able to spend money
+    
+  Scenario: debt
+    When I create a new debt
+    Then I should see the account
+    And I should be able to transfer money to it
+    And I should be able to transfer money from it
+    And I should not be able to spend money
+    
+  Scenario: wallet
+    When I create a new debt
+    Then I should see the account
+    And I should be able to transfer money to it
+    And I should be able to transfer money from it
+    And I should be able to spend money
