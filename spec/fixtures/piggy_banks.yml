@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  balance_in_pence: 1
+  goal_in_pence: 1
+  due_on: 2008-06-08
+
+two:
+  name: MyString
+  balance_in_pence: 1
+  goal_in_pence: 1
+  due_on: 2008-06-08

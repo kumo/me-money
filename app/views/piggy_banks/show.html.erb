@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @piggy_bank.name %>
+</p>
+
+<p>
+  <b>Balance in pence:</b>
+  <%=h @piggy_bank.balance_in_pence %>
+</p>
+
+<p>
+  <b>Goal in pence:</b>
+  <%=h @piggy_bank.goal_in_pence %>
+</p>
+
+<p>
+  <b>Due on:</b>
+  <%=h @piggy_bank.due_on %>
+</p>
+
+
+<%= link_to 'Edit', edit_piggy_bank_path(@piggy_bank) %> |
+<%= link_to 'Back', piggy_banks_path %>

@@ -1,0 +1,26 @@
+<h1>Listing piggy_banks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Balance in pence</th>
+    <th>Goal in pence</th>
+    <th>Due on</th>
+  </tr>
+
+<% for piggy_bank in @piggy_banks %>
+  <tr>
+    <td><%=h piggy_bank.name %></td>
+    <td><%=h piggy_bank.balance_in_pence %></td>
+    <td><%=h piggy_bank.goal_in_pence %></td>
+    <td><%=h piggy_bank.due_on %></td>
+    <td><%= link_to 'Show', piggy_bank %></td>
+    <td><%= link_to 'Edit', edit_piggy_bank_path(piggy_bank) %></td>
+    <td><%= link_to 'Destroy', piggy_bank, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New piggy_bank', new_piggy_bank_path %>

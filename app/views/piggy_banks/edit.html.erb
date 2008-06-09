@@ -1,0 +1,28 @@
+<h1>Editing piggy_bank</h1>
+
+<% form_for(@piggy_bank) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :balance_in_pence %><br />
+    <%= f.text_field :balance_in_pence %>
+  </p>
+  <p>
+    <%= f.label :goal_in_pence %><br />
+    <%= f.text_field :goal_in_pence %>
+  </p>
+  <p>
+    <%= f.label :due_on %><br />
+    <%= f.date_select :due_on %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @piggy_bank %> |
+<%= link_to 'Back', piggy_banks_path %>

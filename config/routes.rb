@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :piggy_banks
+
   map.resources :accounts, :has_many => :entries, :collection => {:dashboard => :get}
 
   map.root :controller => "accounts", :action => "dashboard"
