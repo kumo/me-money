@@ -120,3 +120,30 @@ describe PiggyBank, "when calculating if goal has been reached" do
     @piggy_bank.has_goal?.should == false
   end
 end
+
+describe PiggyBank, "when calculating days left" do
+  before(:each) do
+    @piggy_bank = PiggyBank.new
+  end
+  
+  it "should be 0 if today" do
+    @piggy_bank.due_on = Date.today
+    @piggy_bank.days_to_go.should == 0
+  end
+
+  it "should be 1 if tomorrow" do
+    @piggy_bank.due_on = Date.today + 1.days
+    @piggy_bank.days_to_go.should == 1
+  end
+
+
+  it "should be 7 if next week" do
+    @piggy_bank.due_on = Date.today + 1.week
+    @piggy_bank.days_to_go.should == 7
+  end
+  
+  it "should be 0 if in the past" do
+    @piggy_bank.due_on = Date.today - 3.days
+    @piggy_bank.days_to_go.should == 0
+  end
+end

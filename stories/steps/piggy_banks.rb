@@ -11,10 +11,23 @@ steps_for :piggy_banks do
     @piggy_bank.update_attribute(:goal_in_pence, amount.to_i)
   end
 
+  Given "the piggy bank is due $date" do |date|
+    date = parse_date(date)
+    @piggy_bank.update_attribute(:due_on, date)
+  end
+  
   When "I add $amount euros to the piggy bank" do |amount|
     post_via_redirect "/accounts/#{@piggy_bank.id}/entries", :entry => {:amount_in_pence => -amount.to_i, :description => "new entry", :account_id => @piggy_bank.id}
   end
 
+  When "I view the piggy bank" do
+    get "/piggy_banks/#{@piggy_bank.id}"
+  end
+  
+  Then "I should see the piggy bank" do
+    response.should render_template("piggy_banks/show")
+  end
+  
   Then "I should have $amount euros in the piggy bank" do |amount|
     lambda {
       @piggy_bank.reload
@@ -46,6 +59,16 @@ steps_for :piggy_banks do
   
   Then "the piggy bank should not have a goal" do
     @piggy_bank.has_goal?.should == false
+  end
+  
+  Then "I should see that there are $amount days left" do |amount|
+    response.should have_text(/#{amount}/)
+    #response.should have_text(/#{amount} day(s) left/)
+  end
+
+  Then "I should see that there are $amount euros to go" do |amount|
+    response.should have_text(/#{amount}/)
+    #response.should have_text(/#{amount} euro(s) to go/)
   end
 end
 

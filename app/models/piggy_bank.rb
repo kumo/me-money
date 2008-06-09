@@ -4,9 +4,13 @@ class PiggyBank < Account
   def amount_to_go_in_pence
     amount = self.goal_in_pence - self.balance_in_pence
     
-    amount = 0 if amount < 0
-    
-    amount
+    (amount < 0 ? 0 : amount)
+  end
+  
+  def days_to_go
+    days = self.due_on - Date.today
+
+    (days < 0 ? 0 : days)
   end
   
   def goal_reached?

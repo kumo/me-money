@@ -1,0 +1,14 @@
+Story: viewing piggy banks
+  As a money saver
+  I want to check on my saving up
+  So that I can see if everything is going to plan
+  
+  Scenario: piggy bank due today
+    Given a piggy bank named 'Holiday'
+    And the piggy bank has a goal of 300 euros
+    And the piggy bank has 250 euros in it
+    And the piggy bank is due today
+    When I view the piggy bank
+    Then I should see the piggy bank
+    And I should see that there are 0 days left
+    And I should see that there are 50 euros to go
