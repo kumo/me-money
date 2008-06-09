@@ -4,16 +4,16 @@
   <%= f.error_messages %>
 
   <p>
+    <%= f.label :amount_in_pence %><br />
+    <%= f.text_field :amount_in_pence %>
+  </p>
+  <p>
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </p>
   <p>
     <%= f.label :paid_on %><br />
     <%= f.date_select :paid_on %>
-  </p>
-  <p>
-    <%= f.label :amount_in_pence %><br />
-    <%= f.text_field :amount_in_pence %>
   </p>
   <p>
     <%= f.label :account_id %><br />
